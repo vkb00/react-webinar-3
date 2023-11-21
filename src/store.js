@@ -6,7 +6,6 @@ class Store {
     this.state = initState;
     this.listeners = []; // Слушатели изменений состояния
     this.state.lastId = this.state.list.length;
-    this.state.countSelected= [];
   }
 
   /**
