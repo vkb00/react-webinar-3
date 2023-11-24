@@ -10,7 +10,14 @@ import './styles.css';
 function App({ store }) {
 
   const list = store.getState().list;
-
+  const formatCountString = (count) => {
+    if (count % 100 > 10 && count % 100 < 20)
+      return 'раз';
+    if (count % 10 <= 1 || count % 10 > 4)
+      return 'раз';
+    else
+      return 'раза';
+  }
   return (
     <div className='App'>
       <div className='App-head'>
@@ -26,7 +33,7 @@ function App({ store }) {
               <div className={'Item' + (item.selected ? ' Item_selected' : '')}
                 onClick={() => store.selectItem(item.code)}>
                 <div className='Item-code'>{item.code}</div>
-                <div className='Item-title'>{item.title} {!!item.countSelected && `| Выделяли ${item.countSelected} раз`}</div>
+                <div className='Item-title'>{item.title} {!!item.countSelected && `| Выделяли ${item.countSelected} ${formatCountString(item.countSelected)}`}</div>
                 <div className='Item-actions'>
                   <button onClick={(e) => {
                     store.deleteItem(item.code);
