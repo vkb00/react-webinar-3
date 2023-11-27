@@ -26,3 +26,12 @@ export function createElement(name, props = {}, ...children) {
 
   return element;
 }
+
+export const formatCountString = (count, singl, multiply) => {
+  if (count % 100 > 10 && count % 100 < 20)
+    return singl;
+  if (count % 10 <= 1 || count % 10 > 4)
+    return singl;
+  else
+    return multiply;
+}
