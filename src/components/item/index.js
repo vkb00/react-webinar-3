@@ -9,11 +9,13 @@ function Item(props) {
     onDelete: (e) => {
       e.stopPropagation();
       props.onDelete(props.item);
+
       setCountOnBucket(countOnBucket - 1);
 
     },
     onAddToBucket: () => {
       props.onAddToBucket(props.item);
+
     }
   }
 

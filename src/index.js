@@ -14,7 +14,9 @@ const store = new Store({
     { code: generateCode(), countOnBucket: 0, title: 'Карандаши цветные', price: 111 },
     { code: generateCode(), countOnBucket: 0, title: 'Товар сюрприз', price: 0 },
   ],
-  bucketSpace: []
+  bucketSpace: [],
+  totalBucketPrice: 0,
+  countProductsInbucket: 0
 });
 
 const root = createRoot(document.getElementById('root'));

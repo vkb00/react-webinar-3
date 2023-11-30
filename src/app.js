@@ -13,12 +13,16 @@ function App({ store }) {
 
   const list = store.getState().list;
   const bucketSpace = store.getState().bucketSpace;
+  const totalBucketPrice = store.getState().totalBucketPrice;
+  const countProductsInbucket = store.getState().countProductsInbucket;
   const [isModalOpen, setModalOpen] = useState(false);
-  const [totalBucketPrice, setTotalBucketPrice] = useState(0);
+  // const [totalBucketPrice, setTotalBucketPrice] = useState(0);
   const callbacks = {
     onDeleteItem: useCallback((code) => {
       console.log('del')
+
       store.deleteItem(code);
+      store.sumCountProductsInBucket();
     }, [store]),
 
     onAddItem: useCallback(() => {
@@ -26,6 +30,7 @@ function App({ store }) {
     }, [store]),
 
     onAddToBucket: useCallback((item) => {
+      //store.sumCountProductsInBucket();
       store.addToBucket(item);
     }, [store]),
     getBucketInfo: useCallback(() => {
@@ -38,6 +43,12 @@ function App({ store }) {
     closeModal: () => {
       setModalOpen(false);
     },
+    sumBucketPrice: useCallback(() => {
+      store.sumBucketPrice();
+    }),
+    sumCountProductsInBucket: () => {
+      store.sumCountProductsInBucket();
+    }
 
 
   }
@@ -48,14 +59,23 @@ function App({ store }) {
         <List list={bucketSpace}
           isDelete={true}
           onDeleteItem={callbacks.onDeleteItem}
+
         />
       </Modal>
       <Head title='Магазин' />
-      <Controls bucketSpace={bucketSpace} openModal={callbacks.openModal} />
+      <Controls bucketSpace={bucketSpace}
+        openModal={callbacks.openModal}
+        sumBucket={callbacks.sumBucketPrice}
+        totalBucketPrice={totalBucketPrice}
+        countProductsInbucket={countProductsInbucket}
+        sumCountProductsInBucket={callbacks.sumCountProductsInBucket}
+      />
 
       <List list={list}
         isDelete={false}
-        onAddToBucket={callbacks.onAddToBucket} />
+        onAddToBucket={callbacks.onAddToBucket}
+      />
+
     </PageLayout>
   );
 }
