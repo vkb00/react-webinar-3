@@ -1,4 +1,5 @@
-import {generateCode} from "./utils";
+import { useState } from "react";
+import { generateCode } from "./utils";
 
 /**
  * Хранилище состояния приложения
@@ -46,7 +47,7 @@ class Store {
   addItem() {
     this.setState({
       ...this.state,
-      list: [...this.state.list, {code: generateCode(), title: 'Новая запись'}]
+      list: [...this.state.list, { code: generateCode(), title: 'Новая запись' }]
     })
   };
 
@@ -54,35 +55,30 @@ class Store {
    * Удаление записи по коду
    * @param code
    */
-  deleteItem(code) {
-    this.setState({
-      ...this.state,
-      // Новый список, в котором не будет удаляемой записи
-      list: this.state.list.filter(item => item.code !== code)
-    })
+  deleteItem(item) {
+    console.log(this.state.bucketSpace);
+    if (item.countOnBucket > 1) {
+      item.countOnBucket -= 1;
+
+    }
+    else {
+      item.countOnBucket -= 1;
+      this.setState({
+        ...this.state,
+        // Новый список, в котором не будет удаляемой записи
+        bucketSpace: this.state.bucketSpace.filter(i => i.code !== item.code)
+      })
+    }
   };
 
-  /**
-   * Выделение записи по коду
-   * @param code
-   */
-  selectItem(code) {
+  addToBucket(item) {
+    item.countOnBucket += 1;
     this.setState({
       ...this.state,
-      list: this.state.list.map(item => {
-        if (item.code === code) {
-          // Смена выделения и подсчёт
-          return {
-            ...item,
-            selected: !item.selected,
-            count: item.selected ? item.count : item.count + 1 || 1,
-          };
-        }
-        // Сброс выделения если выделена
-        return item.selected ? {...item, selected: false} : item;
-      })
+      bucketSpace: [...this.state.bucketSpace, item]
     })
   }
+
 }
 
 export default Store;
