@@ -15,21 +15,42 @@ function Controls({ bucketSpace, openModal, sumBucket, totalBucketPrice, countPr
   //   });
   // }
   useEffect(() => {
-    console.log('effect');
+    console.log('effect', countProductsInbucket);
     // sumBucketPrice(bucketSpace);
     sumCountProductsInBucket();
     sumBucket();
   }, [bucketSpace])
-  return (
-    <div className='Controls'>
-      <p>В корзине: {countProductsInbucket} {plural(countProductsInbucket, {
-        one: 'товар',
-        few: 'товара',
-        many: 'товаров'
-      })} / {totalBucketPrice} ₽</p>
-      <button onClick={openModal}>Перейти</button>
-    </div>
-  )
+  if (countProductsInbucket) {
+    return (
+      <div className='Controls'>
+        <p>В корзине:
+          <b className='Controls-info'>
+            {" " + countProductsInbucket + " "}
+            {plural(countProductsInbucket, {
+              one: 'товар',
+              few: 'товара',
+              many: 'товаров'
+            })} / {totalBucketPrice} ₽
+          </b>
+        </p>
+        <div className='Controls-action'>
+          <button onClick={openModal}>Перейти</button>
+        </div>
+      </div>
+    )
+  }
+  else {
+    return (
+      <div className='Controls'>
+        <p>В корзине: <b className='Controls-info'>пусто</b></p>
+        <div className='Controls-action'>
+          <button onClick={openModal}>Перейти</button>
+        </div>
+      </div>
+    )
+  }
+
+
 }
 
 Controls.propTypes = {

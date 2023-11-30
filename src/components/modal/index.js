@@ -17,7 +17,7 @@ function Modal({ isOpen, onClose, children, totalBucketPrice }) {
           {children}
         </div>
         <div className="Modal-totalPrice">
-          Итого{totalBucketPrice}
+          <b><span>Итого</span>{totalBucketPrice} ₽</b>
         </div>
       </div>
     </div>,

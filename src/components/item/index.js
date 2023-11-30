@@ -26,12 +26,15 @@ function Item(props) {
       <div className='Item-title'>
         {props.item.title}
       </div>
-      <div className='Item-title'>
-        {props.item.price}
+      <div className='Item-price'>
+        {props.item.price + " ₽"}
       </div>
-      <div className='Item-title'>
-        {countOnBucket}
-      </div>
+      {props.isDelete &&
+        <div className='Item-count'>
+          <span>{countOnBucket + " шт"}</span>
+        </div>
+      }
+
       <div className='Item-actions'>
         <button onClick={!props.isDelete ?
           callbacks.onAddToBucket :

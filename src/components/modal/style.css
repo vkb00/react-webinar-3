@@ -1,17 +1,24 @@
-.Modal { 
+.Modal {
   display: flex;
   flex-direction: column;
-  
+
   width: 960px;
   height: 407px;
   background-color: white;
-  border:2px solid black;
-
+  border: 2px solid black;
 }
-.Modal-content{
+.Modal-content {
   overflow-y: scroll;
 }
-.modalOverlay{
+.Modal-totalPrice {
+  display: flex;
+  justify-content: flex-end;
+  margin: 20px 120px 50px 53px;
+}
+.Modal-totalPrice span {
+  margin-right: 60px;
+}
+.modalOverlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -20,5 +27,5 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(1,1,1,0.5);
+  background-color: rgba(1, 1, 1, 0.5);
 }

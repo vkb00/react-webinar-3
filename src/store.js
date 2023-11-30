@@ -57,22 +57,13 @@ class Store {
    */
   deleteItem(item) {
     console.log(this.state.bucketSpace);
-    if (item.countOnBucket > 1) {
-      item.countOnBucket -= 1;
-      this.setState({
-        ...this.state,
-        // Новый список, в котором не будет удаляемой записи
-        totalBucketPrice: this.state.totalBucketPrice - item.price
-      })
-    }
-    else {
-      item.countOnBucket -= 1;
-      this.setState({
-        ...this.state,
-        // Новый список, в котором не будет удаляемой записи
-        bucketSpace: this.state.bucketSpace.filter(i => i.code !== item.code)
-      })
-    }
+    item.countOnBucket = 0;
+    this.setState({
+      ...this.state,
+      // Новый список, в котором не будет удаляемой записи
+      bucketSpace: this.state.bucketSpace.filter(i => i.code !== item.code)
+    })
+
   };
 
   addToBucket(item) {
@@ -94,14 +85,11 @@ class Store {
   }
   sumCountProductsInBucket() {
     console.log(...new Set(this.state.bucketSpace));
-    let count = 0;
-    [...new Set(this.state.bucketSpace)].forEach(item => {
 
-      count += item.countOnBucket
-    })
+
     this.setState({
       ...this.state,
-      countProductsInbucket: count
+      countProductsInbucket: [...new Set(this.state.bucketSpace)].length
     })
   }
 
