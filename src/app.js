@@ -39,16 +39,15 @@ function App({ store }) {
     openModal: () => {
       setModalOpen(true);
     },
-
     closeModal: () => {
       setModalOpen(false);
     },
     sumBucketPrice: useCallback(() => {
       store.sumBucketPrice();
-    }),
-    sumCountProductsInBucket: () => {
+    }, [store]),
+    sumCountProductsInBucket: useCallback(() => {
       store.sumCountProductsInBucket();
-    }
+    }, [store])
 
 
   }

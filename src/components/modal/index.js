@@ -26,11 +26,14 @@ function Modal({ isOpen, onClose, children, totalBucketPrice }) {
 }
 
 Modal.propTypes = {
-  onAdd: PropTypes.func
+  isOpen: PropTypes.bool,
+  onClose: PropTypes.func,
+  totalBucketPrice: PropTypes.number,
+  children: PropTypes.node
 };
 
 Modal.defaultProps = {
-  onAdd: () => { }
+  onClose: () => { }
 }
 
 export default React.memo(Modal);

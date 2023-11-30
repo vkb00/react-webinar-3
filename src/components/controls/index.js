@@ -4,19 +4,9 @@ import { plural } from "../../utils";
 import './style.css';
 
 function Controls({ bucketSpace, openModal, sumBucket, totalBucketPrice, countProductsInbucket, sumCountProductsInBucket }) {
-  const [sum, setSum] = useState(0);
-  const [count, setCount] = useState(0);
 
-  // const sumBucketPrice = (bucket) => {
-  //   console.log(bucket)
-  //   bucket.forEach(item => {
-  //     setSum(sum + item.price);
-  //     setCount(count + 1);
-  //   });
-  // }
   useEffect(() => {
     console.log('effect', countProductsInbucket);
-    // sumBucketPrice(bucketSpace);
     sumCountProductsInBucket();
     sumBucket();
   }, [bucketSpace])
@@ -54,6 +44,12 @@ function Controls({ bucketSpace, openModal, sumBucket, totalBucketPrice, countPr
 }
 
 Controls.propTypes = {
+  bucketSpace: PropTypes.array,
+  openModal: PropTypes.func,
+  sumBucket: PropTypes.func,
+  totalBucketPrice: PropTypes.number,
+  countProductsInbucket: PropTypes.number,
+  sumCountProductsInBucket: PropTypes.func,
   onAdd: PropTypes.func
 };
 

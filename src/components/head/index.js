@@ -16,6 +16,7 @@ function Head({ title, option }) {
 
 Head.propTypes = {
   title: PropTypes.node,
+  option: PropTypes.func
 };
 
 export default React.memo(Head);

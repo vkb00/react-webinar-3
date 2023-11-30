@@ -31,10 +31,14 @@ List.propTypes = {
     code: PropTypes.number
   })).isRequired,
   onDeleteItem: PropTypes.func,
+  onAddToBucket: PropTypes.func,
+  isDelete: PropTypes.bool
 };
 
 List.defaultProps = {
   onDeleteItem: () => {
+  },
+  onAddToBucket: () => {
   },
 
 }

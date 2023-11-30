@@ -50,9 +50,12 @@ Item.propTypes = {
   item: PropTypes.shape({
     code: PropTypes.number,
     title: PropTypes.string,
-    count: PropTypes.number
+    countOnBucket: PropTypes.number,
+    price: PropTypes.number
   }).isRequired,
   onDelete: PropTypes.func,
+  onAddToBucket: PropTypes.func,
+  isDelete: PropTypes.bool
 };
 
 Item.defaultProps = {
