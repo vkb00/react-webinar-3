@@ -43,12 +43,6 @@ class Store {
   /**
    * Добавление новой записи
    */
-  addItem() {
-    this.setState({
-      ...this.state,
-      list: [...this.state.list, { code: generateCode(), title: 'Новая запись' }]
-    })
-  };
 
   /**
    * Удаление записи по коду
@@ -83,9 +77,6 @@ class Store {
     })
   }
   sumCountProductsInBucket() {
-    console.log(...new Set(this.state.bucketSpace));
-
-
     this.setState({
       ...this.state,
       countProductsInbucket: [...new Set(this.state.bucketSpace)].length

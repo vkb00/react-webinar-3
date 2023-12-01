@@ -1,15 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import PropTypes from 'prop-types';
 import { plural } from "../../utils";
 import './style.css';
 
-function Controls({ bucketSpace, openModal, sumBucket, totalBucketPrice, countProductsInbucket, sumCountProductsInBucket }) {
-
-  useEffect(() => {
-    console.log('effect', countProductsInbucket);
-    sumCountProductsInBucket();
-    sumBucket();
-  }, [bucketSpace])
+function Controls({ openModal, totalBucketPrice, countProductsInbucket }) {
 
   if (countProductsInbucket) {
     return (
@@ -40,17 +34,11 @@ function Controls({ bucketSpace, openModal, sumBucket, totalBucketPrice, countPr
       </div>
     )
   }
-
-
 }
-
 Controls.propTypes = {
-  bucketSpace: PropTypes.array,
   openModal: PropTypes.func,
-  sumBucket: PropTypes.func,
   totalBucketPrice: PropTypes.number,
   countProductsInbucket: PropTypes.number,
-  sumCountProductsInBucket: PropTypes.func,
   onAdd: PropTypes.func
 };
 
