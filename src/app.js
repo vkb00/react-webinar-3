@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import List from "./components/list";
 import Controls from "./components/controls";
 import Head from "./components/head";
@@ -16,11 +16,10 @@ function App({ store }) {
   const totalBucketPrice = store.getState().totalBucketPrice;
   const countProductsInbucket = store.getState().countProductsInbucket;
   const [isModalOpen, setModalOpen] = useState(false);
-  // const [totalBucketPrice, setTotalBucketPrice] = useState(0);
+
   const callbacks = {
     onDeleteItem: useCallback((code) => {
       console.log('del')
-
       store.deleteItem(code);
       store.sumCountProductsInBucket();
     }, [store]),
@@ -30,7 +29,6 @@ function App({ store }) {
     }, [store]),
 
     onAddToBucket: useCallback((item) => {
-      //store.sumCountProductsInBucket();
       store.addToBucket(item);
     }, [store]),
     getBucketInfo: useCallback(() => {

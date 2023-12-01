@@ -1,16 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 import './style.css';
 
 function Item(props) {
-  const [countOnBucket, setCountOnBucket] = useState(props.item.countOnBucket)
   const callbacks = {
     onDelete: (e) => {
       e.stopPropagation();
       props.onDelete(props.item);
-
-      setCountOnBucket(countOnBucket - 1);
 
     },
     onAddToBucket: () => {
@@ -31,7 +28,7 @@ function Item(props) {
       </div>
       {props.isDelete &&
         <div className='Item-count'>
-          <span>{countOnBucket + " шт"}</span>
+          <span>{props.item.countOnBucket + " шт"}</span>
         </div>
       }
 

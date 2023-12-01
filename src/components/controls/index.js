@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import PropTypes from 'prop-types';
 import { plural } from "../../utils";
 import './style.css';
@@ -10,6 +10,7 @@ function Controls({ bucketSpace, openModal, sumBucket, totalBucketPrice, countPr
     sumCountProductsInBucket();
     sumBucket();
   }, [bucketSpace])
+
   if (countProductsInbucket) {
     return (
       <div className='Controls'>
