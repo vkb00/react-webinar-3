@@ -1,15 +1,16 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import { plural } from "../../utils";
+import { cn as bem } from '@bem-react/classname';
 import './style.css';
 
 function Controls({ openModal, totalBucketPrice, countProductsInbucket }) {
-
+  const cn = bem('Controls');
   if (countProductsInbucket) {
     return (
-      <div className='Controls'>
+      <div className={cn()}>
         <p>В корзине:
-          <b className='Controls-info'>
+          <b className={cn('info')}>
             {" " + countProductsInbucket + " "}
             {plural(countProductsInbucket, {
               one: 'товар',
@@ -18,7 +19,7 @@ function Controls({ openModal, totalBucketPrice, countProductsInbucket }) {
             })} / {totalBucketPrice} ₽
           </b>
         </p>
-        <div className='Controls-action'>
+        <div className={cn('actions')}>
           <button onClick={openModal}>Перейти</button>
         </div>
       </div>
@@ -27,8 +28,8 @@ function Controls({ openModal, totalBucketPrice, countProductsInbucket }) {
   else {
     return (
       <div className='Controls'>
-        <p>В корзине: <b className='Controls-info'>пусто</b></p>
-        <div className='Controls-action'>
+        <p>В корзине: <b className={cn('info')}>пусто</b></p>
+        <div className={cn('actions')}>
           <button onClick={openModal}>Перейти</button>
         </div>
       </div>

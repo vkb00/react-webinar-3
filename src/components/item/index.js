@@ -1,9 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-
+import { cn as bem } from '@bem-react/classname';
 import './style.css';
 
 function Item(props) {
+  const cn = bem('Item');
+
   const callbacks = {
     onDelete: (e) => {
       e.stopPropagation();
@@ -18,21 +20,21 @@ function Item(props) {
 
 
   return (
-    <div className={'Item'}>
-      <div className='Item-code'>{props.item.code}</div>
-      <div className='Item-title'>
+    <div className={cn()}>
+      <div className={cn('code')}>{props.item.code}</div>
+      <div className={cn('title')}>
         {props.item.title}
       </div>
-      <div className='Item-price'>
+      <div className={cn('price')}>
         {props.item.price + " ₽"}
       </div>
       {props.isDelete &&
-        <div className='Item-count'>
+        <div className={cn('count')}>
           <span>{props.item.countOnBucket + " шт"}</span>
         </div>
       }
 
-      <div className='Item-actions'>
+      <div className={cn('actions')}>
         <button onClick={!props.isDelete ?
           callbacks.onAddToBucket :
           callbacks.onDelete}>

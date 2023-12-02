@@ -40,20 +40,11 @@ class Store {
     for (const listener of this.listeners) listener();
   }
 
-  /**
-   * Добавление новой записи
-   */
-
-  /**
-   * Удаление записи по коду
-   * @param code
-   */
   deleteItem(item) {
     console.log(this.state.bucketSpace);
     item.countOnBucket = 0;
     this.setState({
       ...this.state,
-      // Новый список, в котором не будет удаляемой записи
       bucketSpace: this.state.bucketSpace.filter(i => i.code !== item.code)
     })
 

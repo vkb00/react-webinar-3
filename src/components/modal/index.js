@@ -2,21 +2,22 @@ import React from "react";
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import Head from "../head";
+import { cn as bem } from '@bem-react/classname';
 import './style.css';
 
 function Modal({ isOpen, onClose, children, totalBucketPrice }) {
+  const cn = bem('Modal');
   if (!isOpen) return null;
   return ReactDOM.createPortal(
     <div className="modalOverlay">
-      <div className='Modal'>
-        <div className='Modal-action'>
+      <div className={cn()}>
+        <div className={cn('action')}>
           <Head title='Корзина' option={onClose} />
-
         </div>
-        <div className="Modal-content">
+        <div className={cn('content')}>
           {children}
         </div>
-        <div className="Modal-totalPrice">
+        <div className={cn('totalPrice')}>
           <b><span>Итого</span>{totalBucketPrice} ₽</b>
         </div>
       </div>
