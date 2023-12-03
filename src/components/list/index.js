@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Item from "../item";
 import './style.css';
 
-function List({ list, onDeleteItem, onAddToBucket, isDelete }) {
+function List({ list, onDeleteItem, onAddToBucket, isDelete, arrayCountsOnBucket }) {
 
 
   return (
@@ -11,12 +11,20 @@ function List({ list, onDeleteItem, onAddToBucket, isDelete }) {
       !isDelete ?
         list.map(item =>
           <div key={item.code} className='List-item'>
-            <Item item={item} onDelete={onDeleteItem} onAddToBucket={onAddToBucket} isDelete={isDelete} />
+            <Item item={item}
+              onDelete={onDeleteItem}
+              onAddToBucket={onAddToBucket}
+              isDelete={isDelete}
+              countOnBucket={arrayCountsOnBucket.find(product => product.code === item.code)} />
           </div>
         ) :
         [...new Set(list)].map(item =>
           <div key={item.code} className='List-item'>
-            <Item item={item} onDelete={onDeleteItem} onAddToBucket={onAddToBucket} isDelete={isDelete} />
+            <Item item={item}
+              onDelete={onDeleteItem}
+              onAddToBucket={onAddToBucket}
+              isDelete={isDelete}
+              countOnBucket={arrayCountsOnBucket.find(product => product.code === item.code)} />
           </div>
         )
 

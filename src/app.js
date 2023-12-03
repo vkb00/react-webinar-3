@@ -15,11 +15,11 @@ function App({ store }) {
   const bucketSpace = store.getState().bucketSpace;
   const totalBucketPrice = store.getState().totalBucketPrice;
   const countProductsInbucket = store.getState().countProductsInbucket;
+  const arrayCountsOnBucket = store.getState().arrayCountsOnBucket;
   const [isModalOpen, setModalOpen] = useState(false);
 
   const callbacks = {
     onDeleteItem: useCallback((code) => {
-      console.log('del')
       store.deleteItem(code);
       store.sumCountProductsInBucket();
       store.sumBucketPrice();
@@ -33,12 +33,12 @@ function App({ store }) {
     getBucketInfo: useCallback(() => {
       return store.getState().bucketSpace;
     }, [store]),
-    openModal: () => {
+    openModal: useCallback(() => {
       setModalOpen(true);
-    },
-    closeModal: () => {
+    }, []),
+    closeModal: useCallback(() => {
       setModalOpen(false);
-    },
+    }, []),
   }
 
   return (
@@ -47,7 +47,7 @@ function App({ store }) {
         <List list={bucketSpace}
           isDelete={true}
           onDeleteItem={callbacks.onDeleteItem}
-
+          arrayCountsOnBucket={arrayCountsOnBucket}
         />
       </Modal>
       <Head title='Магазин' />
@@ -59,6 +59,7 @@ function App({ store }) {
       <List list={list}
         isDelete={false}
         onAddToBucket={callbacks.onAddToBucket}
+        arrayCountsOnBucket={arrayCountsOnBucket}
       />
 
     </PageLayout>

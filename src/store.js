@@ -30,10 +30,6 @@ class Store {
     return this.state;
   }
 
-  /**
-   * Установка состояния
-   * @param newState {Object}
-   */
   setState(newState) {
     this.state = newState;
     // Вызываем всех слушателей
@@ -41,22 +37,51 @@ class Store {
   }
 
   deleteItem(item) {
-    console.log(this.state.bucketSpace);
-    item.countOnBucket = 0;
     this.setState({
       ...this.state,
-      bucketSpace: this.state.bucketSpace.filter(i => i.code !== item.code)
+      bucketSpace: this.state.bucketSpace.filter(i => i.code !== item.code),
+      arrayCountsOnBucket: this.state.arrayCountsOnBucket.reduce((accumulator, currentValue) => {
+        if (currentValue.code === item.code)
+          return [...accumulator];
+        else
+          return [...accumulator, currentValue];
+      }, [])
     })
-
   };
 
   addToBucket(item) {
-    item.countOnBucket += 1;
+    const tempItem = this.state.arrayCountsOnBucket.find(product => product.code === item.code);
+    if (!tempItem) {
+      this.setState({
+        ...this.state,
+        arrayCountsOnBucket: [...this.state.arrayCountsOnBucket, {
+          code: item.code,
+          count: 1
+        }]
+      })
+
+    }
+    else {
+      this.setState({
+        ...this.state,
+        arrayCountsOnBucket: this.state.arrayCountsOnBucket.reduce((accumulator, currentValue) => {
+          if (currentValue.code === item.code)
+            return [...accumulator, {
+              code: item.code,
+              count: tempItem.count + 1
+            }];
+          else
+            return [...accumulator, currentValue];
+        }, [])
+      })
+    }
+
     this.setState({
       ...this.state,
       bucketSpace: [...this.state.bucketSpace, item]
     })
   }
+
   sumBucketPrice() {
     let sum = 0;
     this.state.bucketSpace.forEach(item => {
@@ -67,10 +92,11 @@ class Store {
       totalBucketPrice: sum
     })
   }
+
   sumCountProductsInBucket() {
     this.setState({
       ...this.state,
-      countProductsInbucket: [...new Set(this.state.bucketSpace)].length
+      countProductsInbucket: this.state.arrayCountsOnBucket.length
     })
   }
 

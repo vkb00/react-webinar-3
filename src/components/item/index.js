@@ -30,7 +30,7 @@ function Item(props) {
       </div>
       {props.isDelete &&
         <div className={cn('count')}>
-          <span>{props.item.countOnBucket + " шт"}</span>
+          <span>{props.countOnBucket.count + " шт"}</span>
         </div>
       }
 
