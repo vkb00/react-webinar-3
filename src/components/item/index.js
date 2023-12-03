@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { formatPrice } from "../../utils"
 import { cn as bem } from '@bem-react/classname';
 import './style.css';
 
@@ -26,7 +27,7 @@ function Item(props) {
         {props.item.title}
       </div>
       <div className={cn('price')}>
-        {props.item.price + " ₽"}
+        {formatPrice(props.item.price)}
       </div>
       {props.isDelete &&
         <div className={cn('count')}>

@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import { plural } from "../../utils";
+import { plural, formatPrice } from "../../utils";
 import { cn as bem } from '@bem-react/classname';
 import './style.css';
 
@@ -16,7 +16,7 @@ function Controls({ openModal, totalBucketPrice, countProductsInbucket }) {
               one: 'товар',
               few: 'товара',
               many: 'товаров'
-            })} / {totalBucketPrice} ₽
+            })} / {formatPrice(totalBucketPrice)}
           </b>
         </p>
         <div className={cn('actions')}>

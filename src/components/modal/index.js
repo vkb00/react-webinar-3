@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
+import { formatPrice } from '../../utils'
 import Head from "../head";
 import { cn as bem } from '@bem-react/classname';
 import './style.css';
@@ -18,7 +19,7 @@ function Modal({ isOpen, onClose, children, totalBucketPrice }) {
           {children}
         </div>
         <div className={cn('totalPrice')}>
-          <b><span>Итого</span>{totalBucketPrice} ₽</b>
+          <b><span>Итого</span>{formatPrice(totalBucketPrice)}</b>
         </div>
       </div>
     </div>,
