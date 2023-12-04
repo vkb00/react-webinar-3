@@ -6,7 +6,7 @@ import Head from "../head";
 import { cn as bem } from '@bem-react/classname';
 import './style.css';
 
-function Modal({ isOpen, onClose, children, totalBucketPrice }) {
+function Modal({ isOpen, onClose, children, totalBucketPrice, countProductsInbucket }) {
   const cn = bem('Modal');
   if (!isOpen) return null;
   return ReactDOM.createPortal(
@@ -15,7 +15,7 @@ function Modal({ isOpen, onClose, children, totalBucketPrice }) {
         <div className={cn('action')}>
           <Head title='Корзина' option={onClose} />
         </div>
-        <div className={cn('content')}>
+        <div className={cn('content') + `${countProductsInbucket > 4 ? " addScroll" : ""}`}>
           {children}
         </div>
         <div className={cn('totalPrice')}>

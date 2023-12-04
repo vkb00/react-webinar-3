@@ -5,11 +5,12 @@
   width: 960px;
   height: 407px;
   background-color: white;
-  border: 2px solid black;
+  border-radius: 10px;
 }
-.Modal-content {
+.addScroll {
   overflow-y: scroll;
 }
+
 .Modal-totalPrice {
   display: flex;
   justify-content: flex-end;
@@ -17,6 +18,9 @@
 }
 .Modal-totalPrice span {
   margin-right: 60px;
+}
+.Head {
+  border-radius: 10px;
 }
 .modalOverlay {
   position: fixed;

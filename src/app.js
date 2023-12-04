@@ -43,7 +43,11 @@ function App({ store }) {
 
   return (
     <PageLayout>
-      <Modal isOpen={isModalOpen} onClose={callbacks.closeModal} totalBucketPrice={totalBucketPrice}>
+      <Modal isOpen={isModalOpen}
+        onClose={callbacks.closeModal}
+        totalBucketPrice={totalBucketPrice}
+        countProductsInbucket={countProductsInbucket}
+      >
         <List list={bucketSpace}
           isDelete={true}
           onDeleteItem={callbacks.onDeleteItem}
