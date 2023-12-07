@@ -1,0 +1,11 @@
+.Pagination {
+  display: flex;
+  justify-content: end;
+}
+.current {
+  background-color: #0087e9;
+}
+li {
+  margin: 10px;
+  list-style-type: none;
+}
