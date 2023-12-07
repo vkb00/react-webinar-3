@@ -18,14 +18,16 @@ export function plural(value, variants = {}, locale = 'ru-RU') {
 export function paginationFormat(pageNumbers, currentPage) {
 
   if (currentPage === 1 || currentPage === 2)
-    return [...pageNumbers.slice(0, 3), pageNumbers.length];
+    return [...pageNumbers.slice(0, 3), -1, pageNumbers.length];
 
   if (currentPage === pageNumbers.length || currentPage === pageNumbers.length - 1)
-    return [1, ...pageNumbers.slice(-3)];
+    return [1, -1, ...pageNumbers.slice(-3)];
 
+  if (currentPage === 3)
+    return [1, currentPage - 1, currentPage, currentPage + 1, -1, pageNumbers.length]
 
-  if (currentPage === 3 || currentPage === pageNumbers.length - 2)
-    return [1, currentPage - 1, currentPage, currentPage + 1, pageNumbers.length]
+  if (currentPage === pageNumbers.length - 2)
+    return [1, -1, currentPage - 1, currentPage, currentPage + 1, pageNumbers.length]
 
   return [1, -1, currentPage - 1, currentPage, currentPage + 1, -2, pageNumbers.length]
 

@@ -5,7 +5,7 @@ function Pagination({ limitProductsOnPage, allProductsCount, paginate, currentPa
   const [addClassCurrent, setClassCurrent] = useState(false);
   const pageNumbers = [];
   let arr = [];
-  for (let i = 1; i < Math.ceil(allProductsCount / limitProductsOnPage); i++) {
+  for (let i = 1; i < (allProductsCount / limitProductsOnPage) + 1; i++) {
     pageNumbers.push(i)
   }
   arr = paginationFormat(pageNumbers, currentPage)
