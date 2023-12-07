@@ -12,7 +12,7 @@ function Item(props) {
   const callbacks = {
     onAdd: (e) => props.onAdd(props.item._id)
   }
-
+  console.log('item')
   return (
     <div className={cn()}>
       {/*<div className={cn('code')}>{props.item._id}</div>*/}

@@ -14,9 +14,11 @@ const ItemInfo = () => {
     const store = useStore();
     const getItemInfo = async () => {
         await store.actions.currentItem.getItemInfo(state.itemId);
+        await store.actions.basket.getItemInfo(state.itemId);
     }
     const select = useSelector(state => ({
         currentItem: state.currentItem.currentItem,
+        list: state.catalog.list,
         amount: state.basket.amount,
         sum: state.basket.sum,
         activeModal: state.modals.name
@@ -28,7 +30,9 @@ const ItemInfo = () => {
     }
     useEffect(() => {
         getItemInfo();
-    }, [])
+
+
+    }, [state])
     return (
         <PageLayout>
             <Head title={select.currentItem.title} />

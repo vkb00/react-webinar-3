@@ -24,7 +24,7 @@ class CurrentItem extends StoreModule {
   }
 
   async getItemInfo(id) {
-    console.log('ci', id)
+    console.log('ci', this.currentItem)
     const response = await fetch(`/api/v1/articles/${id}?fields=*,madeIn(title,code),category(title)`);
     const json = await response.json();
     this.setState({
