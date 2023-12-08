@@ -7,12 +7,11 @@ import List from "../../components/list";
 import Pagination from "../../components/pagination";
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
-
+import { useLanguage } from '../../changeLanguage';
 function Main() {
 
   const store = useStore();
-
-  const [products, setProducts] = useState([]);
+  const { language, languagePack } = useLanguage();
   const [currentPage, setCurrentPage] = useState(1);
   const [allProductsCount, setAllProductsCount] = useState(0);
   const limitProductsOnPage = 10;
@@ -32,7 +31,6 @@ function Main() {
   useEffect(() => {
     console.log('ef', currentPage);
     store.actions.catalog.load(limitProductsOnPage, firstProductIndex);
-    //paginate(currentPage)
     store.actions.catalog.getAllProductsCount().then(res => setAllProductsCount(res));
   }, []);
 
@@ -58,7 +56,7 @@ function Main() {
   return (
     <PageLayout>
 
-      <Head title='Магазин' />
+      <Head title={languagePack[language].shop} />
       <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount}
         sum={select.sum} />
       <List list={select.list} renderItem={renders.item} />
