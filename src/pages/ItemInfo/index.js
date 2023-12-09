@@ -10,7 +10,6 @@ import { numberFormat } from "../../utils";
 import './style.css';
 const ItemInfo = () => {
     const { state } = useLocation();
-    const [item, setItem] = useState({});
     const store = useStore();
     const getItemInfo = async () => {
         await store.actions.currentItem.getItemInfo(state.itemId);
@@ -18,7 +17,6 @@ const ItemInfo = () => {
     }
     const select = useSelector(state => ({
         currentItem: state.currentItem.currentItem,
-        list: state.catalog.list,
         amount: state.basket.amount,
         sum: state.basket.sum,
         activeModal: state.modals.name

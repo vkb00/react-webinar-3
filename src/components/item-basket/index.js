@@ -23,7 +23,7 @@ function ItemBasket(props) {
         state={{
           itemId: props.item._id,
         }}
-        onClick={props.onClose}
+        onClick={props.closeModal}
         className={cn('title')}>
         {props.item.title}
       </Link>

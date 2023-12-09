@@ -12,7 +12,7 @@ class Basket extends StoreModule {
         description: "",
         edition: 0,
         madeIn: { title: '' },
-        price: 659.13,
+        price: 0,
         title: "",
         _id: ""
 

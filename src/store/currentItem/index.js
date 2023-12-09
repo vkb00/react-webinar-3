@@ -14,7 +14,7 @@ class CurrentItem extends StoreModule {
         description: "",
         edition: 0,
         madeIn: { title: '' },
-        price: 659.13,
+        price: 0,
         title: "",
         _id: ""
 
@@ -24,13 +24,13 @@ class CurrentItem extends StoreModule {
   }
 
   async getItemInfo(id) {
-    console.log('ci', this.currentItem)
+    console.log('ci', this.getState().currentItem)
     const response = await fetch(`/api/v1/articles/${id}?fields=*,madeIn(title,code),category(title)`);
     const json = await response.json();
     this.setState({
       ...this.getState(),
       currentItem: json.result
-    }, 'Загружен товар из АПИ');
+    }, `Загружен товар из АПИ ${this.getState().currentItem}`);
   }
 }
 
