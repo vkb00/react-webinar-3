@@ -3,6 +3,8 @@ import Item from "../../components/item";
 import PageLayout from "../../components/page-layout";
 import Head from "../../components/head";
 import BasketTool from "../../components/basket-tool";
+import MainMenu from "../../components/main-menu";
+import ToolBar from "../../components/tool-bar"
 import List from "../../components/list";
 import Pagination from "../../components/pagination";
 import useStore from "../../store/use-store";
@@ -57,8 +59,11 @@ function Main() {
     <PageLayout>
 
       <Head title={languagePack[language].shop} />
-      <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount}
-        sum={select.sum} />
+      <ToolBar>
+        <MainMenu />
+        <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount}
+          sum={select.sum} />
+      </ToolBar>
       <List list={select.list} renderItem={renders.item} />
       <Pagination
         limitProductsOnPage={limitProductsOnPage}

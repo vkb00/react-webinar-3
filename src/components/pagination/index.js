@@ -2,7 +2,7 @@ import { memo, useState } from "react";
 import './style.css';
 import { paginationFormat } from "../../utils"
 function Pagination({ limitProductsOnPage, allProductsCount, paginate, currentPage }) {
-  const [addClassCurrent, setClassCurrent] = useState(false);
+
   const pageNumbers = [];
   let arr = [];
   for (let i = 1; i < (allProductsCount / limitProductsOnPage) + 1; i++) {
@@ -16,15 +16,18 @@ function Pagination({ limitProductsOnPage, allProductsCount, paginate, currentPa
         arr.map(number => {
           if (number < 0)
             return (
-              <li key={number}>
+              <li key={number} className={"space"}>
                 ...
               </li>
             )
           else
             return (
-              <li key={number} >
-                <a className={currentPage === number ? "current" : "page"}
-                  onClick={() => { paginate(number); setClassCurrent(true) }}>{number}</a>
+              <li key={number}
+                className={currentPage === number ? "page current" : "page"}
+                onClick={() => { paginate(number); }}
+              >
+                <a
+                >{number}</a>
               </li>
             )
         })

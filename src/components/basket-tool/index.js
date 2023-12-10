@@ -11,7 +11,6 @@ function BasketTool({ sum, amount, onOpen }) {
   const { language, languagePack } = useLanguage();
   return (
     <div className={cn()}>
-      <Link to={"/"} className={cn('linkToHome')}>{languagePack[language].home}</Link>
       <div>
         <span className={cn('label')}>{languagePack[language].inBasket}:</span>
         <span className={cn('total')}>

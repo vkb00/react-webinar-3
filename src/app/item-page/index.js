@@ -2,13 +2,16 @@ import React, { useEffect, useState, useCallback } from 'react'
 import { useLocation } from 'react-router-dom';
 import Head from "../../components/head";
 import BasketTool from "../../components/basket-tool";
-import Basket from "../../app/basket";
+import MainMenu from "../../components/main-menu";
+import ToolBar from "../../components/tool-bar"
+import Basket from "../basket";
 import PageLayout from "../../components/page-layout";
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
-import { numberFormat } from "../../utils";
+import ItemInfo from "../../components/item-info"
 import './style.css';
-const ItemInfo = () => {
+
+const ItemPage = () => {
     const { state } = useLocation();
     const store = useStore();
     const getItemInfo = async () => {
@@ -28,25 +31,27 @@ const ItemInfo = () => {
     }
     useEffect(() => {
         getItemInfo();
-
-
     }, [state])
+
     return (
         <PageLayout>
             <Head title={select.currentItem.title} />
-            <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount}
-                sum={select.sum} />
+            <ToolBar>
+                <MainMenu />
+                <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount}
+                    sum={select.sum} />
+            </ToolBar>
             {select.activeModal === 'basket' && <Basket />}
-            <div className='content'>
-                <p>{select.currentItem.description}</p>
-                <p>Страна производитель <b>{select.currentItem.madeIn.title}</b></p>
-                <p>Категория <b>{select.currentItem.category.title}</b></p>
-                <p>Год выпуска <b>{select.currentItem.edition}</b></p>
-                <p className='price'><b>Цена {numberFormat(select.currentItem.price)} ₽</b></p>
-                <button onClick={callbacks.addToBasket}>Добавить</button>
-            </div>
+            <ItemInfo
+                description={select.currentItem.description}
+                country={select.currentItem.madeIn.title}
+                category={select.currentItem.category.title}
+                year={select.currentItem.edition}
+                price={select.currentItem.price}
+                addToBasket={callbacks.addToBasket}
+            />
         </PageLayout>
     );
 };
 
-export default ItemInfo
+export default ItemPage

@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from 'react';
-import languagePack from '../languagePack';
+import languagePack from '../language-pack';
 const LanguageContext = createContext();
 
 const LanguageProvider = ({ children }) => {
