@@ -22,9 +22,11 @@ class Catalog extends StoreModule {
     return count;
   }
 
-  async load(limit, skip) {
+  async load(limit, skip, setLoading) {
+    setLoading(true)
     const response = await fetch(`/api/v1/articles?limit=${limit}&skip=${skip}`);
     const json = await response.json();
+    setLoading(false)
     this.setState({
       ...this.getState(),
       list: json.result.items

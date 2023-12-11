@@ -35,7 +35,4 @@ function Pagination({ limitProductsOnPage, allProductsCount, paginate, currentPa
     </div >
   );
 }
-
-
-
 export default Pagination;

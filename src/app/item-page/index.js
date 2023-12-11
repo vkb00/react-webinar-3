@@ -9,14 +9,18 @@ import PageLayout from "../../components/page-layout";
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
 import ItemInfo from "../../components/item-info"
+import Loading from '../../components/loading';
 
 const ItemPage = () => {
     const { state, pathname, search, hash } = useLocation();
     const { myParam } = useParams();
     const store = useStore();
+    const [loading, setLoading] = useState(false);
     const getItemInfo = async () => {
+        setLoading(true);
         await store.actions.currentItem.getItemInfo(pathname.slice(1));
         await store.actions.basket.getItemInfo(pathname.slice(1));
+        setLoading(false);
     }
     const select = useSelector(state => ({
         currentItem: state.currentItem.currentItem,
@@ -36,21 +40,20 @@ const ItemPage = () => {
 
     return (
         <PageLayout>
-            <Head title={select.currentItem.title} />
+            <Head title={!loading && select.currentItem.title} />
             <ToolBar>
                 <MainMenu />
                 <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount}
                     sum={select.sum} />
             </ToolBar>
             {select.activeModal === 'basket' && <Basket />}
-            <ItemInfo
-                description={select.currentItem.description}
-                country={select.currentItem.madeIn.title}
-                category={select.currentItem.category.title}
-                year={select.currentItem.edition}
-                price={select.currentItem.price}
-                addToBasket={callbacks.addToBasket}
-            />
+            {loading ?
+                <Loading /> :
+                <ItemInfo
+                    item={select.currentItem}
+                    addToBasket={callbacks.addToBasket}
+                />
+            }
         </PageLayout>
     );
 };

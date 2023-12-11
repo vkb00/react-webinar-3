@@ -5,6 +5,7 @@ import Head from "../../components/head";
 import BasketTool from "../../components/basket-tool";
 import MainMenu from "../../components/main-menu";
 import ToolBar from "../../components/tool-bar"
+import Loading from "../../components/loading"
 import List from "../../components/list";
 import Pagination from "../../components/pagination";
 import useStore from "../../store/use-store";
@@ -16,6 +17,7 @@ function Main() {
   const { language, languagePack } = useLanguage();
   const [currentPage, setCurrentPage] = useState(1);
   const [allProductsCount, setAllProductsCount] = useState(0);
+  const [loading, setLoading] = useState(true);
   const limitProductsOnPage = 10;
 
 
@@ -27,12 +29,12 @@ function Main() {
     lastProductIndex = pageNumber * limitProductsOnPage;
     firstProductIndex = lastProductIndex - limitProductsOnPage;
     setCurrentPage(pageNumber);
-    store.actions.catalog.load(limitProductsOnPage, firstProductIndex);
+    store.actions.catalog.load(limitProductsOnPage, firstProductIndex, setLoading);
     console.log(pageNumber)
   }
   useEffect(() => {
-    console.log('ef', currentPage);
-    store.actions.catalog.load(limitProductsOnPage, firstProductIndex);
+    console.log('ef', loading);
+    store.actions.catalog.load(limitProductsOnPage, firstProductIndex, setLoading);
     store.actions.catalog.getAllProductsCount().then(res => setAllProductsCount(res));
   }, []);
 
@@ -64,7 +66,11 @@ function Main() {
         <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount}
           sum={select.sum} />
       </ToolBar>
-      <List list={select.list} renderItem={renders.item} />
+      {loading ?
+        <Loading />
+        : <List list={select.list} renderItem={renders.item} />
+
+      }
       <Pagination
         limitProductsOnPage={limitProductsOnPage}
         allProductsCount={allProductsCount}
