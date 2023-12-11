@@ -22,13 +22,13 @@ function Pagination({ limitProductsOnPage, allProductsCount, paginate, currentPa
             )
           else
             return (
-              <li key={number}
+              <a key={number}
                 className={currentPage === number ? "page current" : "page"}
                 onClick={() => { paginate(number); }}
               >
-                <a
-                >{number}</a>
-              </li>
+
+                {number}
+              </a>
             )
         })
       }

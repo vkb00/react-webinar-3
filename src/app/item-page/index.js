@@ -18,8 +18,8 @@ const ItemPage = () => {
     const [loading, setLoading] = useState(false);
     const getItemInfo = async () => {
         setLoading(true);
-        await store.actions.currentItem.getItemInfo(pathname.slice(1));
-        await store.actions.basket.getItemInfo(pathname.slice(1));
+        await store.actions.currentItem.getItemInfo(pathname.slice(9));
+        await store.actions.basket.getItemInfo(pathname.slice(9));
         setLoading(false);
     }
     const select = useSelector(state => ({
@@ -34,7 +34,7 @@ const ItemPage = () => {
         openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
     }
     useEffect(() => {
-        console.log('page', pathname.slice(1))
+        console.log('page', pathname.slice(9))
         getItemInfo();
     }, [state])
 

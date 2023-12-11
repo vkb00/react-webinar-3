@@ -17,7 +17,7 @@ const ItemInfo = (props) => {
     );
 };
 ItemInfo.propTypes = {
-    item: PropTypes.node,
+    item: PropTypes.object,
     addToBasket: PropTypes.func,
 };
 export default ItemInfo
