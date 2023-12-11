@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react'
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import Head from "../../components/head";
 import BasketTool from "../../components/basket-tool";
 import MainMenu from "../../components/main-menu";
@@ -9,14 +9,14 @@ import PageLayout from "../../components/page-layout";
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
 import ItemInfo from "../../components/item-info"
-import './style.css';
 
 const ItemPage = () => {
-    const { state } = useLocation();
+    const { state, pathname, search, hash } = useLocation();
+    const { myParam } = useParams();
     const store = useStore();
     const getItemInfo = async () => {
-        await store.actions.currentItem.getItemInfo(state.itemId);
-        await store.actions.basket.getItemInfo(state.itemId);
+        await store.actions.currentItem.getItemInfo(pathname.slice(1));
+        await store.actions.basket.getItemInfo(pathname.slice(1));
     }
     const select = useSelector(state => ({
         currentItem: state.currentItem.currentItem,
@@ -30,6 +30,7 @@ const ItemPage = () => {
         openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
     }
     useEffect(() => {
+        console.log('page', pathname.slice(1))
         getItemInfo();
     }, [state])
 

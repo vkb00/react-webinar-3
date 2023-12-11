@@ -1,7 +1,7 @@
 import { memo } from "react";
 import PropTypes from 'prop-types';
 import './style.css';
-import { useLanguage } from '../../changeLanguage';
+import { useLanguage } from '../../change-language';
 function LanguageTool() {
   const { languagePack, language, changeLanguage } = useLanguage();
   return (

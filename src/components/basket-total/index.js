@@ -2,7 +2,7 @@ import { memo } from "react";
 import PropTypes from 'prop-types';
 import { cn as bem } from '@bem-react/classname';
 import { numberFormat } from "../../utils";
-import { useLanguage } from "../../changeLanguage";
+import { useLanguage } from "../../change-language";
 import './style.css';
 
 function BasketTotal({ sum }) {

@@ -4,7 +4,7 @@ import { numberFormat } from "../../utils";
 import { cn as bem } from "@bem-react/classname";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { useLanguage } from '../../changeLanguage';
+import { useLanguage } from '../../change-language';
 import './style.css';
 
 function ItemBasket(props) {

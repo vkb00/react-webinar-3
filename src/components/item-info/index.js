@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import { numberFormat } from "../../utils";
-import { useLanguage } from '../../changeLanguage';
+import { useLanguage } from '../../change-language';
 import PropTypes from 'prop-types';
 import './style.css';
 const ItemInfo = (props) => {

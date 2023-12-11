@@ -9,7 +9,7 @@ import List from "../../components/list";
 import Pagination from "../../components/pagination";
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
-import { useLanguage } from '../../changeLanguage';
+import { useLanguage } from '../../change-language';
 function Main() {
 
   const store = useStore();
