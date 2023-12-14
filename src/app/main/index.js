@@ -1,4 +1,4 @@
-import {memo} from 'react';
+import { memo } from 'react';
 import useStore from "../../hooks/use-store";
 import useTranslate from "../../hooks/use-translate";
 import useInit from "../../hooks/use-init";
@@ -8,6 +8,7 @@ import Head from "../../components/head";
 import CatalogFilter from "../../containers/catalog-filter";
 import CatalogList from "../../containers/catalog-list";
 import LocaleSelect from "../../containers/locale-select";
+import AuthorizationTool from '../authorization-tool';
 
 /**
  * Главная страница - первичная загрузка каталога
@@ -20,16 +21,17 @@ function Main() {
     store.actions.catalog.initParams();
   }, [], true);
 
-  const {t} = useTranslate();
+  const { t } = useTranslate();
 
   return (
     <PageLayout>
+      <AuthorizationTool />
       <Head title={t('title')}>
-        <LocaleSelect/>
+        <LocaleSelect />
       </Head>
-      <Navigation/>
-      <CatalogFilter/>
-      <CatalogList/>
+      <Navigation />
+      <CatalogFilter />
+      <CatalogList />
     </PageLayout>
   );
 }

@@ -1,0 +1,20 @@
+.UserCard {
+  padding: 20px 20px;
+}
+
+.UserCard-prop {
+  margin: 20px 0;
+  display: flex;
+  justify-content: flex-start;
+  font-size: 18px;
+}
+
+.UserCard-prop_size_big {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.UserCard-value {
+  margin-left: 5px;
+  font-weight: bold;
+}

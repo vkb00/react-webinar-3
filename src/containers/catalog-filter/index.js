@@ -24,7 +24,11 @@ function CatalogFilter() {
   const callbacks = {
     // Сортировка
     onSort: useCallback(sort => store.actions.catalog.setParams({ sort }), [store]),
-    onSortCategory: useCallback(category => store.actions.catalog.setParams({ category }), [store]),
+    onSortCategory: useCallback(category => {
+      store.actions.catalog.setParams({ category });
+      callbacks.onPaginate(1);
+    }, [store]),
+    onPaginate: useCallback(page => store.actions.catalog.setParams({ page }), [store]),
     // Поиск
     onSearch: useCallback(query => store.actions.catalog.setParams({ query, page: 1 }), [store]),
     // Сброс
@@ -43,8 +47,8 @@ function CatalogFilter() {
   const getAllCategory = async () => {
     const response = await fetch(`/api/v1/categories?fields=_id,title,parent(_id)&limit=*`);
     const json = await response.json();
-    setCategorySort([{ title: 'Все', _id: 0 }, ...json.result.items]);
-    console.log(json.result.items);
+
+
     const res = json.result.items;
     let result = [];
     res.forEach(item => {
@@ -52,69 +56,42 @@ function CatalogFilter() {
         result.push(item);
 
     });
-    let parentNode;
+    let categoryTree;
+
     function buildCategoryTree(categories, parentId = null) {
       const categoryTree = [];
-      console.log('res', parentId);
       categories
         .filter(category => category.parent?._id == parentId)
         .forEach(category => {
-          console.log('c', category);
           const children = buildCategoryTree(categories, category._id);
-          console.log('ch', children);
           if (children.length) {
             category.children = children;
           }
           categoryTree.push(category);
         });
-      console.log('ct', categoryTree)
       return categoryTree;
     }
 
+    categoryTree = buildCategoryTree(res);
+    console.log('pn', categoryTree);
 
-    parentNode = buildCategoryTree(res);
-    console.log('pn', parentNode);
-    //formatTree2(parentNode)
-    // function formatTree2(arr, depth) {
-    //   let dd = 0;
-    //   console.log(arr)
-    //   arr.map(item => {
-    //     console.log(item)
-
-
-    //     console.log(item)
-    //     item.deps = dd;
-    //     if (!item.parent)
-    //       item.deps = 0;
-    //     if (item.children) {
-    //       dd++;
-
-    //       formatTree2(item.children, dd)
-
-    //     }
-
-
-    //   })
-    //   console.log("fsff", arr)
-    // }
     function formatTree(node, depth) {
       if (!node.children) {
-
         return [{ node, depth }];
       }
       const children = node.children.flatMap(item =>
         formatTree(item, depth + 1)
       )
-      console.log(...children);
       return [{ node, depth }, ...children];
     }
 
-    let gg = parentNode.flatMap(node => formatTree(node, 0));
-    gg.forEach(({ node, depth }) => {
+    let formatedCategoryTree = categoryTree.flatMap(node => formatTree(node, 0));
+    formatedCategoryTree.forEach(({ node, depth }) => {
       node.title = '-'.repeat(depth) + node.title;
     })
-    setCategorySort([{ title: 'Все', _id: 0 }, ...gg.map(item => item.node)])
-    console.log('ffss', gg)
+    setCategorySort([{ title: 'Все', _id: 0 }, ...formatedCategoryTree.map(item => item.node)]);
+
+    console.log('ffss', formatedCategoryTree)
 
   }
   useEffect(() => {

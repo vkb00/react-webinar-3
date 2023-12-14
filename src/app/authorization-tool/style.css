@@ -1,0 +1,11 @@
+/* Контрол с общими действиями */
+.AuthorizationTool {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  font-size: 18px;
+}
+
+.AuthorizationTool-userName {
+  margin: 0 20px;
+}
