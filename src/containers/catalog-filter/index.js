@@ -25,8 +25,9 @@ function CatalogFilter() {
     // Сортировка
     onSort: useCallback(sort => store.actions.catalog.setParams({ sort }), [store]),
     onSortCategory: useCallback(category => {
-      store.actions.catalog.setParams({ category });
       callbacks.onPaginate(1);
+      return store.actions.catalog.setParams({ category });
+
     }, [store]),
     onPaginate: useCallback(page => store.actions.catalog.setParams({ page }), [store]),
     // Поиск
@@ -96,13 +97,13 @@ function CatalogFilter() {
   }
   useEffect(() => {
     getAllCategory()
-    console.log(categorySort);
+    console.log(categorySort, select.sort);
   }, [])
   const { t } = useTranslate();
 
   return (
     <SideLayout padding='medium'>
-      <Select options={categorySort} value={categorySort._id} onChange={callbacks.onSortCategory} />
+      <Select options={categorySort} value={select.category} onChange={callbacks.onSortCategory} />
       <Select options={options.sort} value={select.sort} onChange={callbacks.onSort} />
       <Input value={select.query} onChange={callbacks.onSearch} placeholder={'Поиск'}
         delay={1000} />

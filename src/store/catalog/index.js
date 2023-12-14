@@ -17,7 +17,7 @@ class CatalogState extends StoreModule {
         limit: 10,
         sort: 'order',
         query: '',
-        category: '',
+        category: '0',
       },
       count: 0,
       waiting: false

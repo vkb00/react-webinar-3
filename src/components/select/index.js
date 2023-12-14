@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useEffect } from "react";
 import PropTypes from 'prop-types';
 import './style.css';
 
@@ -8,7 +8,9 @@ function Select(props) {
     props.onChange(e.target.value);
     console.log(e.target.value)
   };
-
+  useEffect(() => {
+    console.log(props)
+  })
   return (
     <select className="Select" value={props.value} onChange={onSelect}>
       {props.options.map(item => (
