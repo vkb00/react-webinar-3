@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
+import FormInput from '../form-input';
 import "./style.css"
-export const LoginForm = (props) => {
-    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+export const LoginForm = () => {
+    const { register, handleSubmit } = useForm();
     const [error, setError] = useState('');
     const navigate = useNavigate();
+
     const onSubmit = async (data) => {
         console.log(data);
         try {
@@ -24,16 +26,17 @@ export const LoginForm = (props) => {
             navigate("/");
         }
         catch (e) {
-            console.log(error)
+            console.log(e)
         }
 
     }
+
+
+
     return (
         <form className='form' onSubmit={handleSubmit(onSubmit)}>
-            <label>Логин</label>
-            <input {...register('login')} />
-            <label>Пароль</label>
-            <input {...register('password')} />
+            <FormInput title={'Логин'} name={'login'} register={register} />
+            <FormInput title={'Пароль'} name={'password'} register={register} />
             {error && <p className='error'>{error}</p>}
             <button type='submit'>Войти</button>
         </form>

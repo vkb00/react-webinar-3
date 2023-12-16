@@ -24,6 +24,7 @@ class Login extends StoreModule {
     const json = await response.json();
     console.log(json);
   }
+
   async getUserInfo() {
     const token = localStorage.getItem('token');
     console.log(token)

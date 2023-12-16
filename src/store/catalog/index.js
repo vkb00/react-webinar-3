@@ -104,6 +104,44 @@ class CatalogState extends StoreModule {
       waiting: false
     }, 'Загружен список товаров из АПИ');
   }
+  buildCategoryTree(categories, parentId = null) {
+    const categoryTree = [];
+    categories
+      .filter(category => category.parent?._id == parentId)
+      .forEach(category => {
+        const children = this.buildCategoryTree(categories, category._id);
+        if (children.length) {
+          category.children = children;
+        }
+        categoryTree.push(category);
+      });
+    return categoryTree;
+  }
+  formatTree(node, depth) {
+    if (!node.children) {
+      return [{ node, depth }];
+    }
+    const children = node.children.flatMap(item =>
+      this.formatTree(item, depth + 1)
+    )
+    return [{ node, depth }, ...children];
+  }
+  async getAllCategory(setCategorySort) {
+    const response = await fetch(`/api/v1/categories?fields=_id,title,parent(_id)&limit=*`);
+    const json = await response.json();
+    const res = json.result.items;
+    let result = [];
+    res.forEach(item => {
+      if (!item.parent)
+        result.push(item);
+    });
+    let categoryTree = this.buildCategoryTree(res);
+    let formatedCategoryTree = categoryTree.flatMap(node => this.formatTree(node, 0));
+    formatedCategoryTree.forEach(({ node, depth }) => {
+      node.title = '-'.repeat(depth) + node.title;
+    })
+    setCategorySort([{ title: 'Все', _id: 0 }, ...formatedCategoryTree.map(item => item.node)]);
+  }
 }
 
 export default CatalogState;

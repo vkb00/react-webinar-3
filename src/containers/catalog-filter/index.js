@@ -34,6 +34,9 @@ function CatalogFilter() {
     onSearch: useCallback(query => store.actions.catalog.setParams({ query, page: 1 }), [store]),
     // Сброс
     onReset: useCallback(() => store.actions.catalog.resetParams(), [store]),
+
+    getAllCategory: useCallback((setCategorySort) => store.actions.catalog.getAllCategory(setCategorySort), [store]),
+
   };
   const [categorySort, setCategorySort] = useState([{ title: 'Все', _id: 0 }]);
   const options = {
@@ -45,58 +48,11 @@ function CatalogFilter() {
     ]), [])
 
   };
-  const getAllCategory = async () => {
-    const response = await fetch(`/api/v1/categories?fields=_id,title,parent(_id)&limit=*`);
-    const json = await response.json();
-
-
-    const res = json.result.items;
-    let result = [];
-    res.forEach(item => {
-      if (!item.parent)
-        result.push(item);
-
-    });
-    let categoryTree;
-
-    function buildCategoryTree(categories, parentId = null) {
-      const categoryTree = [];
-      categories
-        .filter(category => category.parent?._id == parentId)
-        .forEach(category => {
-          const children = buildCategoryTree(categories, category._id);
-          if (children.length) {
-            category.children = children;
-          }
-          categoryTree.push(category);
-        });
-      return categoryTree;
-    }
-
-    categoryTree = buildCategoryTree(res);
-    console.log('pn', categoryTree);
-
-    function formatTree(node, depth) {
-      if (!node.children) {
-        return [{ node, depth }];
-      }
-      const children = node.children.flatMap(item =>
-        formatTree(item, depth + 1)
-      )
-      return [{ node, depth }, ...children];
-    }
-
-    let formatedCategoryTree = categoryTree.flatMap(node => formatTree(node, 0));
-    formatedCategoryTree.forEach(({ node, depth }) => {
-      node.title = '-'.repeat(depth) + node.title;
-    })
-    setCategorySort([{ title: 'Все', _id: 0 }, ...formatedCategoryTree.map(item => item.node)]);
-
-    console.log('ffss', formatedCategoryTree)
-
+  const handlSetCategorySort = (data) => {
+    setCategorySort(data);
   }
   useEffect(() => {
-    getAllCategory()
+    callbacks.getAllCategory(handlSetCategorySort);
     console.log(categorySort, select.sort);
   }, [])
   const { t } = useTranslate();

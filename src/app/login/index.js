@@ -17,24 +17,7 @@ import AuthorizationTool from '../authorization-tool';
  */
 function Login() {
 
-  const store = useStore();
-
-  const select = useSelector(state => ({
-    list: state.basket.list,
-    amount: state.basket.amount,
-    sum: state.basket.sum
-  }));
-
-  const callbacks = {
-    // Удаление из корзины
-    removeFromBasket: useCallback(_id => store.actions.basket.removeFromBasket(_id), [store]),
-    // Закрытие любой модалки
-    closeModal: useCallback(() => store.actions.modals.close(), [store]),
-  }
-
   const { t } = useTranslate();
-
-
 
   return (
     <PageLayout>
@@ -43,9 +26,7 @@ function Login() {
         <LocaleSelect />
       </Head>
       <Navigation />
-
       <LoginForm />
-
     </PageLayout>
   );
 }

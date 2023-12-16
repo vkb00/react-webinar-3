@@ -5,6 +5,7 @@ import useSelector from "../../hooks/use-selector";
 import { cn as bem } from '@bem-react/classname';
 import { numberFormat, plural } from "../../utils";
 import { Link, useNavigate } from "react-router-dom";
+import useTranslate from "../../hooks/use-translate";
 import './style.css';
 
 function AuthorizationTool() {
@@ -15,10 +16,8 @@ function AuthorizationTool() {
   const callbacks = {
     getUserInfo: useCallback(() => store.actions.login.getUserInfo(), [store]),
     logout: useCallback(() => store.actions.login.logout(), [store]),
-
-
   }
-
+  const { t } = useTranslate();
   const select = useSelector(state => ({
     profile: state.login.data,
 
@@ -46,29 +45,14 @@ function AuthorizationTool() {
     <div className={cn()}>
       <Link className={cn('userName')} to={'/profile'}>{authorization ? select.profile?.profile?.name : ""}</Link>
       {!authorization &&
-        <button onClick={login}>Вход</button>
+        <button onClick={login}>{t('login')}</button>
       }
       {authorization &&
-        <button onClick={logout}>Выход</button>
+        <button onClick={logout}>{t('logout')}</button>
       }
 
     </div>
   );
-}
-
-// AuthorizationTool.propTypes = {
-//   onOpen: PropTypes.func.isRequired,
-//   sum: PropTypes.number,
-//   amount: PropTypes.number,
-//   t: PropTypes.func
-// };
-
-AuthorizationTool.defaultProps = {
-  onOpen: () => {
-  },
-  sum: 0,
-  amount: 0,
-  t: (text) => text
 }
 
 export default memo(AuthorizationTool);
