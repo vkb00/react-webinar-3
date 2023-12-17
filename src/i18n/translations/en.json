@@ -16,5 +16,7 @@
     "other": "articles"
   },  
   "login":"login",
-  "logout":"logout"
+  "logout":"logout",
+  "loginLabel":"login",
+  "passwordLabel":"Password"
 }

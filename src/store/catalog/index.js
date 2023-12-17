@@ -37,6 +37,7 @@ class CatalogState extends StoreModule {
     if (urlParams.has('limit')) validParams.limit = Math.min(Number(urlParams.get('limit')) || 10, 50);
     if (urlParams.has('sort')) validParams.sort = urlParams.get('sort');
     if (urlParams.has('query')) validParams.query = urlParams.get('query');
+    if (urlParams.has('category')) validParams.category = urlParams.get('category');
     await this.setParams({ ...this.initState().params, ...validParams, ...newParams }, true);
   }
 
@@ -138,7 +139,7 @@ class CatalogState extends StoreModule {
     let categoryTree = this.buildCategoryTree(res);
     let formatedCategoryTree = categoryTree.flatMap(node => this.formatTree(node, 0));
     formatedCategoryTree.forEach(({ node, depth }) => {
-      node.title = '-'.repeat(depth) + node.title;
+      node.title = '- '.repeat(depth) + node.title;
     })
     setCategorySort([{ title: 'Все', _id: 0 }, ...formatedCategoryTree.map(item => item.node)]);
   }

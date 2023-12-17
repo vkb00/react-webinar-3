@@ -8,9 +8,10 @@ class Login extends StoreModule {
   initState() {
     return {
       data: { f: 's' },
-      authorization: false // признак ожидания загрузки
+
     }
   }
+
   async logout() {
     console.log('logout')
     const token = localStorage.getItem('token');
@@ -22,11 +23,13 @@ class Login extends StoreModule {
       }
     });
     const json = await response.json();
+    this.store.actions.session.removeToken('token');
     console.log(json);
   }
 
   async getUserInfo() {
-    const token = localStorage.getItem('token');
+    console.log(this.store.actions.session.checkAuthorization())
+    const token = this.store.actions.session.getToken();
     console.log(token)
     const response = await fetch('/api/v1/users/self?fields=*', {
       headers: {

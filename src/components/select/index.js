@@ -6,7 +6,7 @@ function Select(props) {
 
   const onSelect = (e) => {
     props.onChange(e.target.value);
-    console.log(e.target.value)
+    console.log(e.target.value);
   };
   useEffect(() => {
     console.log(props)

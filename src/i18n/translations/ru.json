@@ -18,6 +18,8 @@
     "other": "товара"
   },
   "login":"Вход",
-  "logout":"Выход"
+  "logout":"Выход",
+  "loginLabel":"Логин",
+  "passwordLabel":"Пароль"
 
 }

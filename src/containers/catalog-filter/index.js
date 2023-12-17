@@ -38,7 +38,7 @@ function CatalogFilter() {
     getAllCategory: useCallback((setCategorySort) => store.actions.catalog.getAllCategory(setCategorySort), [store]),
 
   };
-  const [categorySort, setCategorySort] = useState([{ title: 'Все', _id: 0 }]);
+  const [categorySort, setCategorySort] = useState([{}]);
   const options = {
     sort: useMemo(() => ([
       { value: 'order', title: 'По порядку' },
@@ -53,7 +53,7 @@ function CatalogFilter() {
   }
   useEffect(() => {
     callbacks.getAllCategory(handlSetCategorySort);
-    console.log(categorySort, select.sort);
+    console.log(categorySort, select);
   }, [])
   const { t } = useTranslate();
 
