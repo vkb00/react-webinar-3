@@ -14,7 +14,7 @@ class Login extends StoreModule {
 
   async logout() {
     console.log('logout')
-    const token = localStorage.getItem('token');
+    const token = this.store.actions.session.getToken();
     const response = await fetch('/api/v1/users/sign', {
       method: 'DELETE',
       headers: {

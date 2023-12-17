@@ -14,9 +14,6 @@ import ProfileContainer from '../../containers/profile-container';
  * Страница товара с первичной загрузкой товара по id из url адреса
  */
 function Profile() {
-  const store = useStore();
-  const navigate = useNavigate();
-
   const select = useSelector(state => ({
     profile: state.login.data,
     authorization: state.session.authorization

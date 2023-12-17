@@ -18,14 +18,11 @@ function App() {
   const store = useStore();
   const navigate = useNavigate();
   const callbacks = {
-    recoveryAuth: useCallback((setSession) => store.actions.session.recoveryAuth(setSession), [store]),
-
-    recoveryAuthorizationApp: useCallback(() => store.actions.session.recoveryAuthorizationApp(), [store])
+    recoveryAuthorization: useCallback(() => store.actions.session.recoveryAuthorization(), [store])
   }
-  const [session, setSession] = useState(false);
   useEffect(() => {
     console.log('sss')
-    callbacks.recoveryAuthorizationApp();
+    callbacks.recoveryAuthorization();
   }, [])
   return (
     <>

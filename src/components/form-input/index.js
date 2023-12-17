@@ -4,15 +4,18 @@ import { cn as bem } from '@bem-react/classname';
 
 import './style.css';
 
-function FormInput({ title, name, register }) {
+function FormInput({ title, name, value, onChange, type }) {
 
-  const cn = bem('Input');
+
   return (
     <>
       <label>{title}</label>
-      <input {...register(name, {
-        required: true,
-      })} />
+      <input
+        name={name}
+        value={value}
+        onChange={onChange}
+        type={type}
+      />
     </>
   )
 }

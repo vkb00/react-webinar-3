@@ -23,40 +23,22 @@ function ProfileContainer({ children }) {
     authorization: state.session.authorization
   }));
   const [auth, setAuth] = useState(false);
-  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const callbacks = {
-    getToken: useCallback(() => store.actions.session.getToken(), [store]),
-    getUserInfo: useCallback(token => store.actions.login.getUserInfo(token), [store]),
-
-
     recoveryAuthorization: useCallback((setAuth, setLoading) => store.actions.session.recoveryAuthorization(setAuth, setLoading), [store]),
-
-    // Пагинация
-
   }
 
   const { t } = useTranslate();
 
   useEffect(() => {
-    callbacks.recoveryAuthorization(setAuth, setLoading).then(i => {
-      if (i)
-        setAuth(i)
+    callbacks.recoveryAuthorization(setAuth).then(isAuth => {
+      if (isAuth)
+        setAuth(isAuth)
       else
         navigate('/login')
-      console.log(i)
+      console.log(isAuth)
     });
     console.log(auth, select.authorization);
-
-    // if (select.authorization) {
-    //   const token = callbacks.getToken();
-    //   callbacks.getUserInfo(token);
-    //   console.log(select.profile)
-    // }
-    // console.log(auth, loading);
-    // if (!loading && !auth)
-    //   navigate("/login")
-
 
   }, [select.authorization])
 
@@ -65,8 +47,6 @@ function ProfileContainer({ children }) {
       <div>
         {children}
       </div> :
-
-
       <></>
 
   );

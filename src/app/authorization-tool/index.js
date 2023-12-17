@@ -6,7 +6,7 @@ import { cn as bem } from '@bem-react/classname';
 import { numberFormat, plural } from "../../utils";
 import { Link, useNavigate } from "react-router-dom";
 import useTranslate from "../../hooks/use-translate";
-import './style.css';
+import AuthorizationToolLayout from "../../components/authorization-tool-layout";
 
 function AuthorizationTool() {
 
@@ -49,8 +49,8 @@ function AuthorizationTool() {
     }
   }, [select.authorization])
   return (
-    <div className={cn()}>
-      <Link className={cn('userName')} to={'/profile'}>{auth ? select.profile?.profile?.name : ""}</Link>
+    <AuthorizationToolLayout>
+      <Link to={'/profile'}>{auth ? select.profile?.profile?.name : ""}</Link>
       {!select.authorization &&
         <button onClick={login}>{t('login')}</button>
       }
@@ -58,7 +58,7 @@ function AuthorizationTool() {
         <button onClick={logout}>{t('logout')}</button>
       }
 
-    </div>
+    </AuthorizationToolLayout>
   );
 }
 
