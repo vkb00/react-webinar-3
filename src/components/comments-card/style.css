@@ -1,0 +1,20 @@
+.CommentsCard-cardItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 40px 0;
+}
+.CommentsCard-cardItem-description {
+  margin: 10px 0;
+  word-wrap: break-word;
+}
+.CommentsCard-answer-buttonPanel {
+  display: flex;
+}
+.CommentsCard {
+  padding: 20px 40px;
+}
+.CommentsCard a {
+  width: 50px;
+  text-decoration: none;
+}
