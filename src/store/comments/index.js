@@ -31,8 +31,9 @@ class CommentsState extends StoreModule {
       ...this.getState(),
       listComments: res.data.result.items,
       waiting: false
-    }, 'Категории загружены');
+    }, 'Комментарии загружены');
   }
+
   async createComment(text, type, parentId) {
     const data = {
       text: text,
@@ -52,37 +53,16 @@ class CommentsState extends StoreModule {
         },
         body: JSON.stringify(data)
       });
+      this.setState({
+        ...this.getState(),
+        listComments: this.listComments,
+        waiting: false
+      }, 'Комментарии загружены');
       console.log(res);
     }
 
   }
-  transformCommentsTree(list, primeId) {
 
-    let result = [];
-    if (list.length === 0)
-      return;
-    list.forEach(item => {
-
-      if (item.parent._id === primeId)
-        result.push(item);
-    })
-    list.forEach(item => {
-
-      let currentElement = result.find(element => element._id === item.parent._id);
-
-      if (currentElement) {
-        //debugger
-        if (currentElement.children)
-          currentElement.children = [...currentElement.children].push(item);
-        else
-          currentElement.children = [item];
-      }
-      console.log('cur', currentElement);
-
-
-    })
-    console.log(result);
-  }
 
 }
 

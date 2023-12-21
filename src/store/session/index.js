@@ -80,7 +80,7 @@ class SessionState extends StoreModule {
     } catch (error) {
       console.error(error);
     }
-    this.setState({...this.initState(), waiting: false});
+    this.setState({ ...this.initState(), waiting: false });
   }
 
   /**
@@ -93,7 +93,7 @@ class SessionState extends StoreModule {
       // Устанавливаем токен в АПИ
       this.services.api.setHeader(this.config.tokenHeader, token);
       // Проверяем токен выбором своего профиля
-      const res = await this.services.api.request({url: '/api/v1/users/self'});
+      const res = await this.services.api.request({ url: '/api/v1/users/self' });
 
       if (res.data.error) {
         // Удаляем плохой токен
@@ -119,7 +119,7 @@ class SessionState extends StoreModule {
    * Сброс ошибок авторизации
    */
   resetErrors() {
-    this.setState({...this.initState(), errors: null})
+    this.setState({ ...this.initState(), errors: null })
   }
 }
 
