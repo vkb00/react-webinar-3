@@ -2,7 +2,6 @@ import { memo, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import useStore from '../../hooks/use-store';
 import Spinner from '../../components/spinner';
-//import useSelector from '../../hooks/use-selector';;
 import CommentsCard from '../../components/comments-card';
 import { useDispatch, useSelector } from 'react-redux';
 import shallowequal from 'shallowequal';
@@ -13,30 +12,26 @@ function Comments({ productId }) {
 
   const store = useStore();
   const dispatch = useDispatch();
-
-  const getComments = async () => {
-    await store.actions.comments.load(productId);
-
-  }
+  const [isLogin, setLogin] = useState(false);
   const createComment = (text, type, parentId, primeId = productId) => {
     dispatch(commentsActions.createComment(text, type, parentId, primeId));
   }
+  const select = useSelector(state => ({
+    data: state.comments.data,
+    waiting: state.comments.waiting,
+  }), shallowequal);
+
   useEffect(() => {
-    //getComments();
     dispatch(commentsActions.load(productId));
-    //store.actions.comments.createComment();
-  }, [])
-  const select = useSelector(state => (
-    //console.log(state),
-    {
-      data: state.comments.data,
-      waiting: state.comments.waiting,
-    }), shallowequal);
+    store.actions.session.remind();
+    setLogin(!!store.state.session.token);
+    console.log("effcom")
+  }, [store.state.session.token])
+
   return (
     <div>
       <Spinner active={select.waiting}>
-        <button onClick={createComment}>ll</button>
-        <CommentsCard list={select.data} primeId={productId} createComment={createComment} />
+        <CommentsCard list={select.data} primeId={productId} createComment={createComment} isLogin={isLogin} />
       </Spinner>
 
     </div>
