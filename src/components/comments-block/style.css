@@ -1,0 +1,22 @@
+.cardItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 15px 0;
+}
+.cardItem-header {
+  display: flex;
+  align-items: center;
+}
+.cardItem-header-date {
+  color: #666;
+  margin-left: 10px;
+}
+.cardItem-description {
+  margin: 10px 0;
+  word-wrap: break-word;
+}
+.cardItem-send {
+  width: 60px;
+  text-decoration: none;
+}

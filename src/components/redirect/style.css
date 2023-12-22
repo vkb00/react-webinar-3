@@ -1,0 +1,15 @@
+.redirect {
+  display: flex;
+  font-size: 16px;
+  align-items: center;
+}
+.redirect-cancel {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  margin-left: 5px;
+}
+.redirect-login {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  margin-right: 5px;
+}
