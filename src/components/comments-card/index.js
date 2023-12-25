@@ -20,6 +20,9 @@ function CommentsCard({ list, primeId, createComment, isLogin, location, handleC
     user: state.session.user.profile?.name,
   }));
   const handleCreateComment = (text, type, parentId) => {
+    const trimmedString = text.trim();
+    if (trimmedString === '')
+      return
     createComment(text, type, parentId)
     resetAnswer();
   }
