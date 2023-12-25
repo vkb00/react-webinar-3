@@ -1,3 +1,9 @@
+.answer-title {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
 .answer-buttonPanel {
   padding: 10px 0;
   display: flex;

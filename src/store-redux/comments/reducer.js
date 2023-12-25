@@ -15,6 +15,13 @@ function reducer(state = initialState, action) {
 
     case "comments/load-error":
       return { ...state, data: [], waiting: false }; //@todo текст ошибки сохранять?
+    case "comments/create":
+      {
+        console.log(action.payload.data)
+
+        console.log({ ...state, data: [...state.data, action.payload.data], waiting: false })
+        return { ...state, data: [...state.data, action.payload.data], waiting: false }; //@todo текст ошибки сохранять?
+      }
 
     default:
       // Нет изменений

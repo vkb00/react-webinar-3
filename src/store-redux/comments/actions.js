@@ -37,24 +37,47 @@ const commentsActions = {
           _type: type
         }
       }
-      try {
-        services._store.actions.session.remind();
-        const token = services._store.state.session.token;
-        if (token) {
-          const res = await services.api.request({
-            url: '/api/v1/comments',
-            method: 'POST',
-            heders: {
-              "X-Token": token
-            },
-            body: JSON.stringify(data)
-          });
+      // try {
+
+      services._store.actions.session.remind();
+      const token = services._store.state.session.token;
+      if (token) {
+        const res = await services.api.request({
+          url: '/api/v1/comments',
+          method: 'POST',
+          heders: {
+            "X-Token": token
+          },
+          body: JSON.stringify(data)
+        });
+        console.log(res.data.result, services._store.state.session)
+        //debugger
+        const transformResult = {
+          _id: res.data.result._id,
+          author: {
+            profile: {
+              name: services._store.state.session.user.profile.name,
+            }
+          },
+          children: [],
+          dateCreate: res.data.result.dateCreate,
+          text: res.data.result.text,
+          level: res.data.result.parent._tree.length,
+          parenId: res.data.result.parent._id,
+          parent: { _type: 'comment' }
         }
-        dispatch(commentsActions.load(primeId));
+        console.log(transformResult);
+
+        //debugger
+        dispatch({ type: 'comments/create', payload: { data: transformResult } });
+
       }
-      catch (e) {
-        console.log('erCom', e)
-      }
+      // console.log(res)
+      //dispatch(commentsActions.load(primeId));
+      // }
+      // catch (e) {
+      //   console.log('erCom', e)
+      // }
     }
   }
   // async createComment(text, type, parentId) {

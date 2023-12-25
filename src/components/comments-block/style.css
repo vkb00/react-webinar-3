@@ -7,16 +7,31 @@
 .cardItem-header {
   display: flex;
   align-items: center;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 }
 .cardItem-header-date {
   color: #666;
   margin-left: 10px;
 }
+.currentAuthor {
+  color: #666;
+}
 .cardItem-description {
   margin: 10px 0;
   word-wrap: break-word;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 .cardItem-send {
   width: 60px;
   text-decoration: none;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
